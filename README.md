@@ -18,7 +18,7 @@ Este projeto visa demonstrar a habilidade de projetar, implementar e gerenciar u
 
 A estrutura do projeto é organizada da seguinte forma:
 
-project-root/
+3nd-projeto-pratico-alura/
 ├── services/
 │   ├── user-service/
 │   ├── book-service/
