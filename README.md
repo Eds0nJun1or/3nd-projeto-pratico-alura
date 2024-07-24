@@ -18,6 +18,7 @@ Este projeto visa demonstrar a habilidade de projetar, implementar e gerenciar u
 
 A estrutura do projeto é organizada da seguinte forma:
 
+```
 3nd-projeto-pratico-alura/
 ├── services/                        # Contém os microsserviços
 │   ├── user-service/                # Microsserviço de gerenciamento de usuários
@@ -75,6 +76,7 @@ A estrutura do projeto é organizada da seguinte forma:
 │       └── build-and-deploy.yaml    # Workflow de build e deploy para GitHub Actions
 ├── README.md                        # Documento de instruções e informações do projeto
 └── .gitignore                       # Arquivo para ignorar arquivos e pastas do controle de versão
+```
 
 ## Serviços
 
