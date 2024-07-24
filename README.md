@@ -1,4 +1,3 @@
-```markdown
 # 3º Projeto Prático - DevOps: Implementação de Microsserviços com Kubernetes (K8s) na AWS (EKS)
 
 ## Desafio
@@ -19,7 +18,6 @@ Este projeto visa demonstrar a habilidade de projetar, implementar e gerenciar u
 
 A estrutura do projeto é organizada da seguinte forma:
 
-```
 project-root/
 ├── services/
 │   ├── user-service/
@@ -36,7 +34,6 @@ project-root/
 │   └── workflows/
 ├── README.md
 └── .gitignore
-```
 
 ## Serviços
 
