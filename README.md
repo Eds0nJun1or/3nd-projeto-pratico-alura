@@ -1,4 +1,3 @@
-```markdown
 # 3º Projeto Prático - DevOps: Implementação de Microsserviços com Kubernetes (K8s) na AWS (EKS)
 
 ## Desafio
@@ -20,22 +19,63 @@ Este projeto visa demonstrar a habilidade de projetar, implementar e gerenciar u
 A estrutura do projeto é organizada da seguinte forma:
 
 ```
-project-root/
-├── services/
-│   ├── user-service/
-│   ├── book-service/
-│   ├── loan-service/
-│   ├── notification-service/
-│   └── auth-service/
-├── infra/
-│   ├── eks/
-│   ├── monitoring/
-│   └── networking/
-├── scripts/
-├── .github/
-│   └── workflows/
-├── README.md
-└── .gitignore
+3nd-projeto-pratico-alura/
+├── services/                        # Contém os microsserviços
+│   ├── user-service/                # Microsserviço de gerenciamento de usuários
+│   │   ├── src/                     # Código-fonte do serviço
+│   │   ├── Dockerfile               # Dockerfile para construção da imagem
+│   │   ├── deployment.yaml          # Configuração de Deployment do Kubernetes
+│   │   ├── service.yaml             # Configuração de Service do Kubernetes
+│   │   └── hpa.yaml                 # Configuração do Horizontal Pod Autoscaler (HPA)
+│   ├── book-service/                # Microsserviço de gerenciamento de livros
+│   │   ├── src/                     # Código-fonte do serviço
+│   │   ├── Dockerfile               # Dockerfile para construção da imagem
+│   │   ├── deployment.yaml          # Configuração de Deployment do Kubernetes
+│   │   ├── service.yaml             # Configuração de Service do Kubernetes
+│   │   └── hpa.yaml                 # Configuração do Horizontal Pod Autoscaler (HPA)
+│   ├── loan-service/                # Microsserviço de gerenciamento de empréstimos
+│   │   ├── src/                     # Código-fonte do serviço
+│   │   ├── Dockerfile               # Dockerfile para construção da imagem
+│   │   ├── deployment.yaml          # Configuração de Deployment do Kubernetes
+│   │   ├── service.yaml             # Configuração de Service do Kubernetes
+│   │   └── hpa.yaml                 # Configuração do Horizontal Pod Autoscaler (HPA)
+│   ├── notification-service/        # Microsserviço de notificações
+│   │   ├── src/                     # Código-fonte do serviço
+│   │   ├── Dockerfile               # Dockerfile para construção da imagem
+│   │   ├── deployment.yaml          # Configuração de Deployment do Kubernetes
+│   │   ├── service.yaml             # Configuração de Service do Kubernetes
+│   │   └── hpa.yaml                 # Configuração do Horizontal Pod Autoscaler (HPA)
+│   └── auth-service/                # Microsserviço de autenticação
+│       ├── src/                     # Código-fonte do serviço
+│       ├── Dockerfile               # Dockerfile para construção da imagem
+│       ├── deployment.yaml          # Configuração de Deployment do Kubernetes
+│       ├── service.yaml             # Configuração de Service do Kubernetes
+│       └── hpa.yaml                 # Configuração do Horizontal Pod Autoscaler (HPA)
+├── infra/                           # Infraestrutura e configurações
+│   ├── eks/                         # Configurações para o cluster EKS
+│   │   ├── cluster.yaml             # Configuração do cluster EKS
+│   │   └── nodegroup.yaml           # Configuração dos grupos de nós
+│   ├── monitoring/                  # Configurações de monitoramento
+│   │   ├── prometheus/              # Configuração do Prometheus
+│   │   │   ├── prometheus-config.yaml  # Configuração do Prometheus
+│   │   │   ├── prometheus-deployment.yaml # Deployment do Prometheus
+│   │   │   └── prometheus-service.yaml   # Service do Prometheus
+│   │   └── grafana/                 # Configuração do Grafana
+│   │       ├── grafana-deployment.yaml   # Deployment do Grafana
+│   │       └── grafana-service.yaml      # Service do Grafana
+│   └── networking/                  # Configurações de rede
+│       ├── ingress.yaml             # Configuração do Ingress
+│       └── dns/                    # Configuração de DNS (se necessário)
+│           └── dns-setup.sh         # Script para configurar DNS
+├── scripts/                         # Scripts de automação
+│   ├── deploy.sh                    # Script para implantação dos microsserviços
+│   ├── teardown.sh                  # Script para remover microsserviços
+│   └── update.sh                    # Script para atualizar microsserviços
+├── .github/                         # Configurações do GitHub Actions
+│   └── workflows/                   # Workflows de CI/CD
+│       └── build-and-deploy.yaml    # Workflow de build e deploy para GitHub Actions
+├── README.md                        # Documento de instruções e informações do projeto
+└── .gitignore                       # Arquivo para ignorar arquivos e pastas do controle de versão
 ```
 
 ## Serviços
