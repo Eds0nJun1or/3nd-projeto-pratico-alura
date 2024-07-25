@@ -2,55 +2,55 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: grafana
-  name: grafana-deployment
+    app: grafana  # Rótulo para identificar o app Grafana
+  name: grafana-deployment  # Nome do Deployment
 spec:
   selector:
     matchLabels:
-      app: grafana
+      app: grafana  # Seleciona os pods com o rótulo 'app: grafana'
   template:
     metadata:
       labels:
-        app: grafana
+        app: grafana  # Aplica o rótulo 'app: grafana' ao template dos pods
     spec:
       securityContext:
-        fsGroup: 472
+        fsGroup: 472  # Define o ID do grupo de arquivos do sistema
         supplementalGroups:
-          - 0
+          - 0  # Define grupos suplementares
       containers:
-        - name: grafana
-          image: grafana/grafana:latest
-          imagePullPolicy: IfNotPresent
+        - name: grafana  # Nome do container
+          image: grafana/grafana:latest  # Imagem do Grafana
+          imagePullPolicy: IfNotPresent  # Política de pull da imagem
           ports:
-            - containerPort: 3000
-              name: http-grafana
-              protocol: TCP
-          readinessProbe:
-            failureThreshold: 3
+            - containerPort: 3000  # Porta exposta pelo container
+              name: http-grafana  # Nome da porta
+              protocol: TCP  # Protocolo usado pela porta
+          readinessProbe:  # Prova de prontidão para verificar se o container está pronto para receber tráfego
+            failureThreshold: 3  # Número de falhas antes de considerar o pod não pronto
             httpGet:
-              path: /robots.txt
-              port: 3000
-              scheme: HTTP
-            initialDelaySeconds: 10
-            periodSeconds: 30
-            successThreshold: 1
-            timeoutSeconds: 2
-          livenessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
+              path: /robots.txt  # Caminho da requisição HTTP para a prova de prontidão
+              port: 3000  # Porta da requisição
+              scheme: HTTP  # Esquema da requisição (HTTP)
+            initialDelaySeconds: 10  # Tempo de espera antes da primeira verificação
+            periodSeconds: 30  # Intervalo entre as verificações
+            successThreshold: 1  # Número de sucessos antes de considerar o pod pronto
+            timeoutSeconds: 2  # Tempo limite para a resposta da verificação
+          livenessProbe:  # Prova de vida para verificar se o container está funcionando corretamente
+            failureThreshold: 3  # Número de falhas antes de considerar o pod não vivo
+            initialDelaySeconds: 30  # Tempo de espera antes da primeira verificação
+            periodSeconds: 10  # Intervalo entre as verificações
+            successThreshold: 1  # Número de sucessos antes de considerar o pod vivo
             tcpSocket:
-              port: 3000
-            timeoutSeconds: 1
-          resources:
+              port: 3000  # Porta usada para a verificação TCP
+            timeoutSeconds: 1  # Tempo limite para a resposta da verificação
+          resources:  # Solicitações de recursos para o container
             requests:
-              cpu: 250m
-              memory: 750Mi
-          volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: grafana-pv
+              cpu: 250m  # Solicitação de CPU
+              memory: 750Mi  # Solicitação de memória
+          volumeMounts:  # Montagem de volumes
+            - mountPath: /var/lib/grafana  # Caminho onde o volume será montado no container
+              name: grafana-pv  # Nome do volume
       volumes:
-        - name: grafana-pv
+        - name: grafana-pv  # Nome do volume
           persistentVolumeClaim:
-            claimName: grafana-pvc
+            claimName: grafana-pvc  # Nome do PersistentVolumeClaim associado

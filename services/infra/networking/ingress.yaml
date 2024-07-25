@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-ingress
+  name: example-ingress  # Nome do recurso Ingress
 spec:
-  ingressClassName: nginx
+  ingressClassName: nginx  # Classe do Ingress para especificar qual controlador de Ingress usar (nginx)
   rules:
-    - host: hello-world.example
+    - host: hello-world.example  # Nome do host para o qual a regra se aplica
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /  # Caminho que será capturado pelo Ingress (raiz do host)
+            pathType: Prefix  # Tipo de caminho (Prefixo) que será capturado
             backend:
               service:
-                name: web
+                name: web  # Nome do serviço ao qual o tráfego será direcionado
                 port:
-                  number: 8080
+                  number: 8080  # Porta do serviço que receberá o tráfego

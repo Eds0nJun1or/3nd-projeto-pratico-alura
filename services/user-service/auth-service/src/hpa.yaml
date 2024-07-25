@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: auth-service-hpa
+  name: auth-service-hpa  # Nome do Horizontal Pod Autoscaler (HPA) para o serviço de autenticação
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: auth-service
-  minReplicas: 2
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 50
+    apiVersion: apps/v1  # Versão da API para o recurso Deployment
+    kind: Deployment  # Tipo do recurso ao qual o HPA está associado (Deployment)
+    name: auth-service  # Nome do Deployment que será escalado
+  minReplicas: 2  # Número mínimo de réplicas para o serviço de autenticação
+  maxReplicas: 10  # Número máximo de réplicas para o serviço de autenticação
+  targetCPUUtilizationPercentage: 50  # Utilização de CPU alvo para acionar a escalabilidade (50%)

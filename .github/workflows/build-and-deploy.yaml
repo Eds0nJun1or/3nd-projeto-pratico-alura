@@ -3,52 +3,52 @@ name: EKS Deploy
 on:
   push:
     branches:
-      - main
+      - main  # O workflow será acionado quando houver um push no branch 'main'
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Define que o job será executado em uma máquina virtual com Ubuntu
 
     steps:
-      - name: Checkout code
+      - name: Checkout code  # Etapa para fazer o checkout do código-fonte do repositório
         uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
+      - name: Configure AWS credentials  # Configura as credenciais da AWS para permitir operações de AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AKIAUTMUZUBEBA3BB5US }}
-          aws-secret-access-key: ${{ secrets.055x5iBA14v8A28C/n25wzI9E11GFlPihNUhNUkr }}
-          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AKIAUTMUZUBEBA3BB5US }}  # ID de acesso da AWS (armazenado como segredo)
+          aws-secret-access-key: ${{ secrets.055x5iBA14v8A28C/n25wzI9E11GFlPihNUhNUkr }}  # Chave secreta da AWS (armazenada como segredo)
+          aws-region: us-east-1  # Região da AWS onde o cluster EKS está localizado
 
-      - name: Set up kubectl
+      - name: Set up kubectl  # Baixa e configura o kubectl, a ferramenta de linha de comando do Kubernetes
         run: |
           curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x ./kubectl
           sudo mv ./kubectl /usr/local/bin/kubectl
 
-      - name: Update kubeconfig
+      - name: Update kubeconfig  # Atualiza o arquivo kubeconfig para permitir o acesso ao cluster EKS
         run: aws eks --region us-east-1 update-kubeconfig --name aws-eks-k8s
 
-      - name: Deploy to EKS
+      - name: Deploy to EKS  # Implanta os serviços no cluster EKS usando kubectl apply para aplicar os arquivos de configuração YAML
         run: |
-          kubectl apply -f services/user-service/deployment.yaml
-          kubectl apply -f services/user-service/service.yaml
-          kubectl apply -f services/user-service/hpa.yaml
-          kubectl apply -f services/book-service/deployment.yaml
-          kubectl apply -f services/book-service/service.yaml
-          kubectl apply -f services/book-service/hpa.yaml
-          kubectl apply -f services/loan-service/deployment.yaml
-          kubectl apply -f services/loan-service/service.yaml
-          kubectl apply -f services/loan-service/hpa.yaml
-          kubectl apply -f services/notification-service/deployment.yaml
-          kubectl apply -f services/notification-service/service.yaml
-          kubectl apply -f services/notification-service/hpa.yaml
-          kubectl apply -f services/auth-service/deployment.yaml
-          kubectl apply -f services/auth-service/service.yaml
-          kubectl apply -f services/auth-service/hpa.yaml
-          kubectl apply -f infra/monitoring/prometheus/prometheus-config.yaml
-          kubectl apply -f infra/monitoring/prometheus/prometheus-deployment.yaml
-          kubectl apply -f infra/monitoring/prometheus/prometheus-service.yaml
-          kubectl apply -f infra/monitoring/grafana/grafana-deployment.yaml
-          kubectl apply -f infra/monitoring/grafana/grafana-service.yaml
-          kubectl apply -f infra/networking/ingress.yaml
+          kubectl apply -f services/user-service/deployment.yaml  # Aplica a configuração do Deployment do user-service
+          kubectl apply -f services/user-service/service.yaml  # Aplica a configuração do Service do user-service
+          kubectl apply -f services/user-service/hpa.yaml  # Aplica a configuração do Horizontal Pod Autoscaler (HPA) do user-service
+          kubectl apply -f services/book-service/deployment.yaml  # Aplica a configuração do Deployment do book-service
+          kubectl apply -f services/book-service/service.yaml  # Aplica a configuração do Service do book-service
+          kubectl apply -f services/book-service/hpa.yaml  # Aplica a configuração do HPA do book-service
+          kubectl apply -f services/loan-service/deployment.yaml  # Aplica a configuração do Deployment do loan-service
+          kubectl apply -f services/loan-service/service.yaml  # Aplica a configuração do Service do loan-service
+          kubectl apply -f services/loan-service/hpa.yaml  # Aplica a configuração do HPA do loan-service
+          kubectl apply -f services/notification-service/deployment.yaml  # Aplica a configuração do Deployment do notification-service
+          kubectl apply -f services/notification-service/service.yaml  # Aplica a configuração do Service do notification-service
+          kubectl apply -f services/notification-service/hpa.yaml  # Aplica a configuração do HPA do notification-service
+          kubectl apply -f services/auth-service/deployment.yaml  # Aplica a configuração do Deployment do auth-service
+          kubectl apply -f services/auth-service/service.yaml  # Aplica a configuração do Service do auth-service
+          kubectl apply -f services/auth-service/hpa.yaml  # Aplica a configuração do HPA do auth-service
+          kubectl apply -f infra/monitoring/prometheus/prometheus-config.yaml  # Aplica a configuração do Prometheus
+          kubectl apply -f infra/monitoring/prometheus/prometheus-deployment.yaml  # Aplica o Deployment do Prometheus
+          kubectl apply -f infra/monitoring/prometheus/prometheus-service.yaml  # Aplica o Service do Prometheus
+          kubectl apply -f infra/monitoring/grafana/grafana-deployment.yaml  # Aplica o Deployment do Grafana
+          kubectl apply -f infra/monitoring/grafana/grafana-service.yaml  # Aplica o Service do Grafana
+          kubectl apply -f infra/networking/ingress.yaml  # Aplica a configuração do Ingress
